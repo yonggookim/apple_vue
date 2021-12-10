@@ -39,9 +39,7 @@
     </div> -->
     
     <!------------------------------------------------------------------->
-    
   </div>
-
 </template>
 
 <script>
@@ -49,8 +47,6 @@ import rooms from './assets/oneroom.js'
 import Discount from './Discount.vue'
 import Modal from './Modal.vue'
 import Card from './Card.vue'
-
-
 
 export default {
   name: 'App',
