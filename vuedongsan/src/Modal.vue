@@ -29,9 +29,6 @@ export default {
           if(isNaN(v) == true){
               alert('문자를 입력하지 마시오');
               this.month = 1;
-          }else if(v==0){
-              alert('0보다 큰 수를 입력하시오')
-              this.month = 1;
           }
       }  
     },

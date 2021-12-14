@@ -15,6 +15,7 @@
         <button v-on:click="open = false">닫기</button>
       </div>
     </div> -->
+    <Modalimage @closeImage="openImage=false" :one="one" :누른번호="누른번호" v-if="openImage == true"></Modalimage>
 <!---------------------------------------------------------------------->
     <div class="menu">
       <a v-for="v in nav_menu" :key="v">{{v}}</a>
@@ -27,10 +28,10 @@
 
 <!-------------------------- Card 컴퍼넌트 ------------------------------>
    
-    <Card @openModal="open=true; 누른번호= xxx.id" :xxx="one[i]" v-for="(v,i) in one" :key="v"></Card>
-    <!-- custom event 사용하여 h4에 온클릭 주기( 간단히 '누른번호=i' 였어도 똑같이 작동) -->
+    <Card @openModal="open=true; 누른번호= $event;" :xxx="one[i]" @bigImage="openImage = true; 누른번호= $event;" v-for="(v,i) in one" :key="v"></Card>
+    <!-- custom event 사용하여 h4에 온클릭 주기( 간단히 '누른번호=i' 였어도 똑같이 작동)
+     이런 식으로 자식 컴퍼에서 부모 컴퍼의 데이터를 수정할 수 있구만 ㅇㅋ -->
   
-
     <!-- <div v-for="(v, i) in one" :key="v">
       <img :src="one[i].image">
       <h4 @click="open = true; 누른번호=i">{{one[i].title}}</h4>
@@ -47,6 +48,7 @@ import rooms from './assets/oneroom.js'
 import Discount from './Discount.vue'
 import Modal from './Modal.vue'
 import Card from './Card.vue'
+import Modalimage from './Modalimage.vue'
 
 export default {
   name: 'App',
@@ -57,7 +59,9 @@ export default {
       oneOrigin:rooms, //rooms데이타를 보존할 원본을 따로두고
       누른번호: 0,
       one: [...rooms], //Data는 걍 import이후 바로 갖다 쓰면 되는구마이
+      one2: [...rooms],
       open: false,
+      openImage: false,
       신고수: [0,0,0],
       nav_menu: ['Home', 'Products', 'About'],
       products: ['원룸', '투룸', '쓰리룸']
@@ -67,6 +71,7 @@ export default {
     Discount : Discount,
     Modal : Modal,
     Card : Card,
+    Modalimage: Modalimage,
     // Component는 import이후 이렇게 컴퍼넌트 등록이 필수
     // 왼쪽 오른쪽 이름이 같으면 Discount; 한문자로 축약해서 쓸수도 O
   },
@@ -170,9 +175,31 @@ img{
 }
 button{
   padding: 5px;
-  background-color: rgb(228, 209, 212);
+  background-color: rgb(230, 234, 240);
   border-radius: 5px;
   margin: 10px;
+  box-shadow: 1px 1px 2px rgba(66, 65, 65, 0.8);
+  cursor: pointer;
 }
-
+button:active{
+  box-shadow: inset 1px 1px 2px rgba(66, 65, 65, 0.5);
+}
+.openImage{
+  width: 100%;
+}
+.openImage img{
+  width: 80%;
+}
+.room-img:hover{
+ box-shadow: 2px 2px 5px rgb(77, 75, 75);
+ cursor: pointer;
+}
+.room-title{
+  width: 500px;
+  margin: 10px auto 0;
+}
+.room-title:hover{
+ box-shadow: 1px 1px 2px rgba(77, 75, 75, 0.3);
+ cursor: pointer;
+}
 </style>

@@ -7,21 +7,23 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
-        <a class="nav-link" href="#">Features</a>
-        <a class="nav-link" href="#">Pricing</a>
+        <a class="nav-link active" aria-current="page" href="#"><router-link to="/">홈 페이지</router-link></a>
+        <a class="nav-link" href="#"><router-link to="/list">리스트 페이지</router-link></a>
+        <a class="nav-link" href="#"><router-link to="/detail">상세 페이지</router-link></a>
         <a class="nav-link disabled">Disabled</a>
       </div>
     </div>
   </div>
 </nav>
-  <h2>Vue 개발자의 블로그</h2>
-  <hr>
-  <List :블로그글="블로그글들[i]" v-for="(v,i) in 블로그글들" :key="i"></List>
+  
+  <!-- <List :블로그글="블로그글들[i]" v-for="(v,i) in 블로그글들" :key="i"></List> -->
+  <!-- <router-view :블로그글="블로그글들[i]" v-for="(v,i) in 블로그글들" :key="i"></router-view> -->
+  <router-view :블로그글들="블로그글들"></router-view>
+
 </template>
 
 <script>
-import List from './components/List.vue'
+// import List from './components/List.vue'
 import 작명1 from './assets/blog'
 
 export default {
@@ -32,7 +34,7 @@ export default {
     }
   },
   components: {
-    List : List
+    // List : List
   }
 }
 </script>
@@ -45,5 +47,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+a{
+  text-decoration: none;
 }
 </style>
