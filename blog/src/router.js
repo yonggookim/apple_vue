@@ -15,7 +15,8 @@ const routes = [
     component: Home
   },
   {
-    path: '/detail/:koo(\\d+)', // detail/여기 아무거나 입력하면.. 대신 숫자로(\\d+)
+    path: '/detail/:koo(\\d+)', // detail/여기 아무거나 입력해도 보여줘 
+                                // 대신 숫자에만 응답하고 싶으면? (\\d+) 추가
     component: Detail,
     children: [
         {

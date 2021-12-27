@@ -6,7 +6,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
+      <div class="navbar-nav" >
         <a class="nav-link active" aria-current="page" href="#"><router-link to="/">홈 페이지</router-link></a>
         <a class="nav-link" href="#"><router-link to="/list">리스트 페이지</router-link></a>
         <a class="nav-link" href="#"><router-link to="/detail">상세 페이지</router-link></a>

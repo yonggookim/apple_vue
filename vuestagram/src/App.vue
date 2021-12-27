@@ -35,6 +35,7 @@ export default {
       poDatas : poDatas,
       step : 0,
       url : "",
+      moreNumber : 0,
     }
   },
   components: {
@@ -53,6 +54,7 @@ export default {
     },
     upload(e){
       let file = e.target.files;
+      console.log(file);
       console.log(file[0]);
       this.url = URL.createObjectURL(file[0]);
       this.step++;
@@ -137,5 +139,10 @@ ul {
   position: relative;
   border-right: 1px solid #eee;
   border-left: 1px solid #eee;
+}
+button{
+  background: rgb(208, 210, 221);
+  cursor: pointer;
+  border-radius: 4px;
 }
 </style>
