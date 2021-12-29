@@ -4,9 +4,9 @@
       <div class="profile"></div>
       <span class="profile-name">{{poData.name}}</span>
     </div>
-    <div class="post-body" :style="{ backgroundImage : `url(${poData.postImage})` }"></div>
-    <div class="post-content" >
-      <p>{{poData.likes}} Likes</p>
+    <div @click="pluslike" :class="`${poData.filter} post-body`" :style="{ backgroundImage : `url(${poData.postImage})` }"></div>
+    <div class=" post-content" >
+      <p><b>{{poData.likes}}</b> Likes <span class="ddabong" @click="pluslike"> 👍</span></p>
       <p><strong>{{poData.name}} </strong> {{poData.content}}</p>
       <p class="date">{{poData.date}}</p>
     </div>
@@ -15,8 +15,19 @@
 
 <script>
 export default {
+  data(){
+    return{
+      boolLike : false,  
+    }
+  },
   props:{
     poData : Object,
+    index : Number,
+  },
+  methods:{
+    pluslike(){
+      this.emitter.emit('pluslike', this.index)
+    }
   }
 }
 </script>
@@ -48,6 +59,7 @@ export default {
   height: 450px;
   background-position: center;
   background-size: cover;
+  cursor: pointer;;
 }
 .post-content {
   padding-left: 15px;
@@ -59,4 +71,7 @@ export default {
   color: grey;
   margin-top: -8px;
 } 
+.ddabong{
+  cursor: pointer;
+}
 </style>

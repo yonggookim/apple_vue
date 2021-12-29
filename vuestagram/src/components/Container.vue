@@ -1,46 +1,80 @@
 <template>
   <div>
     <div v-if="step == 0">
-      <Post :poData="poDatas[i]" v-for="(v, i) in poDatas" :key="i" />
+      <Post :poData="poDatas[i]" :index="i" v-for="(v, i) in poDatas" :key="i"  />
     </div>
 
     <div v-if="step == 1">
-    <div class="upload-image" :style="{ backgroundImage : `url(${url})`}"></div>
+    <div :class="`${chofilter} upload-image`" :style="{ backgroundImage : `url(${url})`}"></div>
     <div class="filters">
+      <!-- <div class="filter-1"></div>
       <div class="filter-1"></div>
       <div class="filter-1"></div>
       <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
+      <div class="filter-1"></div> -->
+      <FilterBox @clickfilter="chofilter=$event" v-for="(v,i) in filters" :key="i" :url="url" :filter="v">{{v}}</FilterBox>
+    
     </div>
     </div>
     <!-- 글작성페이지 -->
 
     <div v-if="step == 2">
-      <div class="upload-image"></div>
+      <div :class="chofilter" class=" upload-image" :style="{ backgroundImage : `url(${url})`}"></div>
       <div class="write">
-        <textarea class="write-box">write!</textarea>
+        <textarea @input="$emit('text', $event.target.value)" class="write-box" >write!</textarea>
+<!-- ★★ @input이용 : text를 받으며 상위컴퍼로 보내면
+          그리고 step==1 에서 class 주던 방식을 바꿔봤다.★★ -->
       </div>
       </div>
+
+    <div v-if="step == 3">
+      <MyPage/>
     </div>
+  </div>
+   
 </template>
 
 <script>
 import Post from "./Post.vue";
+import FilterBox from "./FilterBox.vue"
+import MyPage from "./MyPage.vue"
 
 export default {
+  data(){
+    return{
+      filters : [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
+      "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
+      "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
+      text: "",
+      chofilter : "",
+    }
+  },
+  mounted(){
+    this.emitter.on('작명1', (v)=>{
+      console.log(v);
+      this.chofilter=v;
+    })
+  },
   components: {
     Post,
+    FilterBox,
+    MyPage,
   },
   props: {
     poDatas: Array,
     step: Number,
     url: String,
   },
+  methods:{
+
+  }
 };
 </script>
 
 <style>
+textarea::placeholder{
+  color : rgb(154, 139, 218);
+}
 .upload-image{
 width: 100%;
 height: 450px;
